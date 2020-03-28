@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block body%}
+
+<!--# Submit the user’s input via POST to /search.-->
+<form action="/" method="post" name="form">
+  <div class="md-form active-cyan active-cyan-2 mb-3">
+    <input class="form-control" name="search" type="text" placeholder="Search for a book by entering isbn, author, or title" aria-label="Search">
+  </div>
+</form>
+
+{% endblock %}

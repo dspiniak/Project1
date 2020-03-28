@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block body%}
+
+<!--# Submit the user’s input via POST to /register.-->
+<form action="/register" method="post" name="form">
+  <div class="col-sm-3 my-1">
+    <label for="inputUsername">Username</label>
+    <input type="text" class="form-control" name="username" id="username">
+  </div>
+  <div class="col-sm-3 my-1">
+    <label for="inputPassword1">Password</label>
+    <input type="password" name="password1" id="password1" class="form-control" aria-describedby="passwordHelpInline">
+  </div>
+  <div class="col-sm-3 my-1">
+    <label for="inputPassword2">Re-enter password</label>
+    <input type="password" name="password2" id="password2" class="form-control" aria-describedby="passwordHelpInline">
+  </div>
+  <div class="col-sm-3 my-1">
+    <button type="submit" class="btn btn-primary my-1">Submit</button>
+  <div>
+</form>
+
+<!-- <script type="text/javascript">
+  var usernameNotTaken;
+
+  // function is called when user enters characters on form per the above html
+  function checkUsername(form){
+
+    var username = $('input[name="username"]').val();
+    if(username == ""){
+      alert('You must provide a username');
+    }
+
+    // send username to server via GET and receive 'result' JSON, preventing submit if true
+    $.get('/check?username='+username, function(isNotDuplicate){
+
+      usernameNotTaken = isNotDuplicate;
+
+      if(usernameNotTaken == true){
+        // console.log("entered isNotDuplicate == true")
+        return true;
+      } else{
+        // console.log("false")
+        alert('Username taken, try a different one.');
+        return event.preventDefault();
+      }
+
+    });
+  };
+
+  document.querySelector('form').onsubmit = function(){
+
+    if(username == ""){
+      alert('You must provide a username');
+    }
+
+    if(usernameNotTaken == true){
+        return true;
+      } else{
+        alert('Username taken, try a different one.');
+        return event.preventDefault();
+      }
+  }
+
+</script> -->
+
+{% endblock %}

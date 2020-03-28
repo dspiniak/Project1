@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ book['title'] }}
+{% endblock %}
+
+{% block body%}
+
+  <!-- book details and GoodReads rating -->
+  <p><b>Book details:</b></p>
+    <ul><b>isbn:</b> {{ book['isbn'] }}</ul>
+    <ul><b>title:</b> {{ book['title'] }}</ul>
+    <ul><b>author:</b> {{ book['author'] }}</ul>
+    <ul><b>year:</b> {{ book['year'] }}</ul>
+
+    <!-- show GoodReads rating -->
+    <p>In GoodReads this book has an average rating of
+      <b>{{goodreads_avg_review}}</b> with <b>{{goodreads_review_count}}</b>
+      total ratings.
+    </p>
+
+    <hr>
+    <!-- form for review submission -->
+    <p><b>Leave your rating below:</b></p>
+    <form action="/add_review" method="post" name="form">
+      <input type="hidden" name="isbn" value= {{ book['isbn'] }} />
+      <div class="col-sm-3 my-1">
+        <label for="inputRating">Rating</label>
+        <select class="form-control" name="rating">
+          <option disable selected>Rating</option>
+          <option value ="1">1</option>
+          <option value ="2">2</option>
+          <option value ="3">3</option>
+          <option value ="4">4</option>
+          <option value ="5">5</option>
+        </select>
+      </div>
+      <div class="col-sm-3 my-1">
+        <label for="inputComment">Comment</label>
+        <input type="textarea" name="comment" class="form-control">
+      </div>
+      <div class="col-sm-3 my-1">
+        <button type="submit" class="btn btn-primary my-1">Submit review</button>
+      <div>
+    </form>
+
+    <hr>
+    <!-- show reviews -->
+    {% if reviews == []: %}
+      <p><b>This book doesn't have any reviews yet</b> </p>
+    {% endif %}
+    {% if reviews != []: %}
+      <p><b>See book reviews below:</b> </p>
+      <table id="table" class="table table-striped table-bordered"
+             style="width:100%">
+        <thead>
+          <tr>
+            <th scope="col">rating</th>
+            <th scope="col">comment</th>
+          </tr>
+        </thead>
+
+        {% for row in reviews: %}
+          <tr>
+            <td>{{ row['rating'] }}</td>
+            <td>{{ row['comment'] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+
+{% endblock %}
